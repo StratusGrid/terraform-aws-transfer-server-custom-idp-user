@@ -1,20 +1,18 @@
 resource "aws_iam_role" "sftp_transfer_server_user" {
   name = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}-iam-role${var.name_suffix}"
 
-  assume_role_policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-        "Effect": "Allow",
-        "Principal": {
-            "Service": "transfer.amazonaws.com"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "transfer.amazonaws.com"
         },
-        "Action": "sts:AssumeRole"
-        }
+        "Action" : "sts:AssumeRole"
+      }
     ]
-}
-EOF
+  })
   tags = merge(
     var.input_tags,
     {
@@ -27,37 +25,35 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
   name = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}-iam-policy${var.name_suffix}"
   role = aws_iam_role.sftp_transfer_server_user.id
 
-  policy = <<POLICY
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowListingOfUserFolder",
-            "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:s3:::${var.s3_bucket_name}"
-            ]
-        },
-        {
-            "Sid": "HomeDirObjectAccess",
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:PutObjectAcl",
-                "s3:GetObject",
-                "s3:DeleteObjectVersion",
-                "s3:DeleteObject",
-                "s3:GetObjectVersion",
-                ],
-            "Resource": "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
-        }
+  policy = jsonencode({
+    "Version" = "2012-10-17",
+    "Statement" = [
+      {
+        "Action" = [
+          "s3:ListBucket",
+          "s3:GetBucketLocation",
+        ]
+        "Effect" = "Allow"
+        "Resource" = [
+          "arn:aws:s3:::${var.s3_bucket_name}",
+        ]
+        "Sid" = "AllowListingOfUserFolder"
+      },
+      {
+        "Action" = [
+          "s3:PutObject",
+          "s3:PutObjectAcl",
+          "s3:GetObject",
+          "s3:DeleteObjectVersion",
+          "s3:DeleteObject",
+          "s3:GetObjectVersion",
+        ]
+        "Effect"   = "Allow"
+        "Resource" = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
+        "Sid"      = "HomeDirObjectAccess"
+      },
     ]
-}
-POLICY
+  })
 }
 
 
