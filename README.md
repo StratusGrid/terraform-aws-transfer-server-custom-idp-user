@@ -1,9 +1,10 @@
 # terraform-aws-transfer-server-custom-idp-user
-This is a Terraform module to create users for the AWS SFTP service based on custom identity provider using AWS Secrets Manager. To create the server and the identity provider, use [this module](https://registry.terraform.io/modules/StratusGrid/transfer-server-custom-idp/aws/latest)
+This is a Terraform module to create users for the AWS SFTP service based on custom identity provider using AWS Secrets Manager. To create the server and the identity provider, use [this module](https://registry.terraform.io/modules/StratusGrid/transfer-server-custom-idp/aws/latest).
 
 ### Example usage
 Create one user to login in the AWS Transfer server
 
+```
 # Creation of the AWS Transfer server and the custom IDP provider
 module "transfer-server-custom-idp" {
   name_prefix = var.name_prefix
@@ -23,4 +24,4 @@ module "transfer-server-custom-idp-user" {
   transfer_server_id = module.transfer-server-custom-idp.transfer_server_id
   user_name = "firstuser"
 }
-
+```
