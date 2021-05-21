@@ -14,7 +14,7 @@ resource "aws_iam_role" "sftp_transfer_server_user" {
     ]
   })
   tags = merge(
-    var.input_tags,
+    local.common_tags,
     {
       "Name" = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}-role${var.name_suffix}"
     },
@@ -60,7 +60,7 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
 resource "aws_secretsmanager_secret" "secret" {
   name = "${var.secrets_prefix}/${var.name_prefix}-sftp-${var.user_name}${var.name_suffix}"
   tags = merge(
-    var.input_tags,
+    local.common_tags,
     {
       "Name" = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}${var.name_suffix}"
     },
