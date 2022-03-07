@@ -25,10 +25,10 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
   name = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}-iam-policy${var.name_suffix}"
   role = aws_iam_role.sftp_transfer_server_user.id
 
-  policy = var.read_only ? templatefile("${path.module}/policy-templates/read-only.json",{
+  policy = var.read_only ? templatefile("${path.module}/templates/policy/read-only.json",{
     s3_bucket  = "arn:aws:s3:::${var.s3_bucket_name}"
     user_home       = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
-  }) : templatefile("${path.module}/policy-templates/read-write.json",{
+  }) : templatefile("${path.module}/templates/policy/read-write.json",{
     s3_bucket  = "arn:aws:s3:::${var.s3_bucket_name}"
     user_home       = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
   })
