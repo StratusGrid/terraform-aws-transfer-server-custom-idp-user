@@ -25,34 +25,12 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
   name = "${var.name_prefix}-sftp-transfer-server-user-${var.user_name}-iam-policy${var.name_suffix}"
   role = aws_iam_role.sftp_transfer_server_user.id
 
-  policy = jsonencode({
-    "Version" = "2012-10-17",
-    "Statement" = [
-      {
-        "Action" = [
-          "s3:ListBucket",
-          "s3:GetBucketLocation",
-        ]
-        "Effect" = "Allow"
-        "Resource" = [
-          "arn:aws:s3:::${var.s3_bucket_name}",
-        ]
-        "Sid" = "AllowListingOfUserFolder"
-      },
-      {
-        "Action" = [
-          "s3:PutObject",
-          "s3:PutObjectAcl",
-          "s3:GetObject",
-          "s3:DeleteObjectVersion",
-          "s3:DeleteObject",
-          "s3:GetObjectVersion",
-        ]
-        "Effect"   = "Allow"
-        "Resource" = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
-        "Sid"      = "HomeDirObjectAccess"
-      },
-    ]
+  policy = var.read_only ? templatefile("${path.module}/policy-templates/read-only.json",{
+    s3_bucket  = "arn:aws:s3:::${var.s3_bucket_name}"
+    user_home       = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
+  }) : templatefile("${path.module}/policy-templates/read-write.json",{
+    s3_bucket  = "arn:aws:s3:::${var.s3_bucket_name}"
+    user_home       = "arn:aws:s3:::${var.s3_bucket_name}${var.user_home}*"
   })
 }
 

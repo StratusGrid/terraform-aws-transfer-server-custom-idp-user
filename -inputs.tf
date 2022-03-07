@@ -47,3 +47,9 @@ variable "name_suffix" {
   type        = string
   default     = ""
 }
+
+variable "read_only" {
+  description = "Define if the user is created with read-only privillages"
+  type        = bool
+  default     = false
+}
