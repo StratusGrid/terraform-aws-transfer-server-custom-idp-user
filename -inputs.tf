@@ -14,7 +14,7 @@ variable "user_name" {
 }
 
 variable "user_home" {
-  description = "HOME path for transfer server user"
+  description = "HOME path for transfer server user. Must start with /"
   type        = string
   default     = "/"
 }
