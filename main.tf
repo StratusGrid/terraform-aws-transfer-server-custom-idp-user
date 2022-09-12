@@ -26,15 +26,14 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
   role = aws_iam_role.sftp_transfer_server_user.id
 
   policy = var.read_only ? templatefile("${path.module}/templates/policy/read-only.tftpl",
-  {
-    s3_bucket = "${var.s3_bucket_name}"
-    user_home = "${var.user_home}"
-  }) : templatefile("${path.module}/templates/policy/read-write.tftpl", {
-    s3_bucket = "${var.s3_bucket_name}"
-    user_home = "${var.user_home}"
+    {
+      s3_bucket = "${var.s3_bucket_name}"
+      user_home = "${var.user_home}"
+      }) : templatefile("${path.module}/templates/policy/read-write.tftpl", {
+      s3_bucket = "${var.s3_bucket_name}"
+      user_home = "${var.user_home}"
   })
 }
-
 
 resource "aws_secretsmanager_secret" "secret" {
   name = "${var.secrets_prefix}/${var.name_prefix}-sftp-${var.user_name}${var.name_suffix}"
