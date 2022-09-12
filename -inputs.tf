@@ -14,9 +14,9 @@ variable "user_name" {
 }
 
 variable "user_home" {
-  description = "HOME path for transfer server user. Must start with /"
+  description = "HOME path for transfer server user. Mustn't start with /"
   type        = string
-  default     = "/"
+  default     = ""
 }
 
 variable "ssh_key" {
