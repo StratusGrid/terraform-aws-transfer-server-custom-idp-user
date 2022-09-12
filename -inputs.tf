@@ -3,11 +3,6 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-variable "transfer_server_id" {
-  description = "Transfer Server ID"
-  type        = string
-}
-
 variable "user_name" {
   description = "User name for SFTP server"
   type        = string
