@@ -12,6 +12,10 @@ variable "user_home" {
   description = "HOME path for transfer server user. Mustn't start with /"
   type        = string
   default     = ""
+  validation {
+    condition     = length(regexall("^/", var.user_home)) == 0
+    error_message = "Home path must not start with /."
+  }
 }
 
 variable "ssh_key" {
