@@ -18,7 +18,7 @@ module "transfer-server-custom-idp" {
 module "transfer-server-custom-idp-user" {
   name_prefix = var.name_prefix
   source  = "StratusGrid/transfer-server-custom-idp-user/aws"
-  version = "1.0.2"
+  version = "1.0.4"
 
   s3_bucket_name = "bucket-to-store-files-via-sftp"
   transfer_server_id = module.transfer-server-custom-idp.transfer_server_id
