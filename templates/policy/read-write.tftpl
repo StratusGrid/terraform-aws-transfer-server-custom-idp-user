@@ -1,0 +1,34 @@
+{
+  "Version" : "2012-10-17",
+  "Statement" : [
+    {
+      "Action" : [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Effect" : "Allow",
+      "Resource" : [
+        "arn:aws:s3:::${s3_bucket}"
+      ],
+       "Sid" : "AllowListingOfUserFolder"
+    },
+    {
+      "Action" : [
+        "s3:PutObject",
+        "s3:PutObjectAcl",
+        "s3:GetObject",
+        "s3:DeleteObjectVersion",
+        "s3:DeleteObject",
+        "s3:GetObjectVersion"
+      ],
+      "Effect"   : "Allow",
+%{if user_home == "" }
+      "Resource" : "arn:aws:s3:::${s3_bucket}/*",
+%{ endif }
+%{if user_home != "" }
+      "Resource" : "arn:aws:s3:::${s3_bucket}/${user_home}/*",
+%{ endif }
+      "Sid"      : "HomeDirObjectAccess"
+    }
+  ]
+}
