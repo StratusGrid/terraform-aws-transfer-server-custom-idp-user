@@ -49,7 +49,7 @@ variable "name_suffix" {
 }
 
 variable "read_only" {
-  description = "Define if the user is created with read-only privillages"
+  description = "Define if the user is created with read-only privileges"
   type        = bool
   default     = false
 }
