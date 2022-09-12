@@ -27,11 +27,11 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
 
   policy = var.read_only ? templatefile("${path.module}/templates/policy/read-only.tftpl",
     {
-      s3_bucket = "${var.s3_bucket_name}"
-      user_home = "${var.user_home}"
+      s3_bucket = var.s3_bucket_name
+      user_home = var.user_home
       }) : templatefile("${path.module}/templates/policy/read-write.tftpl", {
-      s3_bucket = "${var.s3_bucket_name}"
-      user_home = "${var.user_home}"
+      s3_bucket = var.s3_bucket_name
+      user_home = var.user_home
   })
 }
 
