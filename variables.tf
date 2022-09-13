@@ -3,20 +3,19 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-variable "transfer_server_id" {
-  description = "Transfer Server ID"
-  type        = string
-}
-
 variable "user_name" {
   description = "User name for SFTP server"
   type        = string
 }
 
 variable "user_home" {
-  description = "HOME path for transfer server user"
+  description = "HOME path for transfer server user. Mustn't start with /"
   type        = string
-  default     = "/"
+  default     = ""
+  validation {
+    condition     = length(regexall("^/", var.user_home)) == 0
+    error_message = "Home path must not start with /."
+  }
 }
 
 variable "ssh_key" {
@@ -46,4 +45,10 @@ variable "name_suffix" {
   description = "String to append to object names. This is optional, so start with dash if using"
   type        = string
   default     = ""
+}
+
+variable "read_only" {
+  description = "Define if the user is created with read-only privileges"
+  type        = bool
+  default     = false
 }
