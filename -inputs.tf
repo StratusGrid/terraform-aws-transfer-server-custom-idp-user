@@ -14,9 +14,9 @@ variable "user_name" {
 }
 
 variable "user_home" {
-  description = "HOME path for transfer server user"
+  description = "HOME path for transfer server user. Mustn't start with /"
   type        = string
-  default     = "/"
+  default     = ""
 }
 
 variable "ssh_key" {
@@ -46,4 +46,10 @@ variable "name_suffix" {
   description = "String to append to object names. This is optional, so start with dash if using"
   type        = string
   default     = ""
+}
+
+variable "read_only" {
+  description = "Define if the user is created with read-only privileges"
+  type        = bool
+  default     = false
 }
