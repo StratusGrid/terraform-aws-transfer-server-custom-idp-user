@@ -27,14 +27,15 @@ resource "aws_iam_role_policy" "sftp_transfer_server_user" {
 
   policy = var.read_only ? templatefile("${path.module}/templates/policy/read-only.tftpl",
     {
-      s3_bucket = "${var.s3_bucket_name}"
-      user_home = "${var.user_home}"
+      s3_bucket = var.s3_bucket_name
+      user_home = var.user_home
       }) : templatefile("${path.module}/templates/policy/read-write.tftpl", {
-      s3_bucket = "${var.s3_bucket_name}"
-      user_home = "${var.user_home}"
+      s3_bucket = var.s3_bucket_name
+      user_home = var.user_home
   })
 }
 
+#tfsec:ignore:aws-ssm-secret-use-customer-key -- Ignores
 resource "aws_secretsmanager_secret" "secret" {
   name = "${var.secrets_prefix}/${var.name_prefix}-sftp-${var.user_name}${var.name_suffix}"
   tags = merge(
