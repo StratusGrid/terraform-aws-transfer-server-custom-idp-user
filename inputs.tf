@@ -3,12 +3,6 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-#tflint-ignore: terraform_unused_declarations -- Ignores warning on unused resource (this resource is used to specify the server-id)
-variable "transfer_server_id" {
-  description = "Transfer Server ID"
-  type        = string
-}
-
 variable "user_name" {
   description = "User name for SFTP server"
   type        = string
