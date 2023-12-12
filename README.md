@@ -52,7 +52,6 @@ module "transfer-server-custom-idp-user" {
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | Transfer Server S3 bucket name | `string` | n/a | yes |
 | <a name="input_secrets_prefix"></a> [secrets\_prefix](#input\_secrets\_prefix) | Prefix used to create AWS Secrets | `string` | `"SFTP"` | no |
 | <a name="input_ssh_key"></a> [ssh\_key](#input\_ssh\_key) | SSH Key for transfer server user | `string` | `""` | no |
-| <a name="input_transfer_server_id"></a> [transfer\_server\_id](#input\_transfer\_server\_id) | Transfer Server ID | `string` | n/a | yes |
 | <a name="input_user_home"></a> [user\_home](#input\_user\_home) | HOME path for transfer server user. Mustn't start with / | `string` | `""` | no |
 | <a name="input_user_name"></a> [user\_name](#input\_user\_name) | User name for SFTP server | `string` | n/a | yes |
 
