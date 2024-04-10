@@ -1,3 +1,4 @@
+header-from: ./.config/header.md
 version: ""
 
 formatter: markdown table
@@ -5,6 +6,8 @@ formatter: markdown table
 name:  terraform-aws-transfer-server-custom-idp-user
 
 content: |-
+  {{ .Header }}
+  
   # terraform-aws-transfer-server-custom-idp-user
 
   GitHub: [StratusGrid/terraform-aws-transfer-server-custom-idp-user](https://github.com/StratusGrid/terraform-aws-transfer-server-custom-idp-user)
@@ -30,6 +33,7 @@ content: |-
 
 sections:
   show:
+    - header
     - resources
     - inputs
     - outputs
