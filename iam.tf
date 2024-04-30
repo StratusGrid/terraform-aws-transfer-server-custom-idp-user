@@ -1,5 +1,5 @@
 resource "aws_iam_role_policy" "sftp_lambda_role_policy" {
-  name = "KmsAccess"
+  name = "KmsAccess-${var.user_name}"
   role = var.secret_access_lambda_role
 
   policy = <<EOF
