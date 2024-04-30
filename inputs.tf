@@ -49,8 +49,8 @@ variable "read_only" {
   default     = false
 }
 
-variable "secret_access_lambda_role_arn" {
-  description = "ARN of the role used by the secret-accessing Lambda. Used to add additional permissions as needed. May cause KMS errors if omitted."
+variable "secret_access_lambda_role" {
+  description = "Name of the role used by the secret-accessing Lambda. Used to add additional permissions as needed. May cause KMS errors if omitted."
   type        = string
   default     = ""
 }
