@@ -9,7 +9,7 @@ variable "user_name" {
 }
 
 variable "user_home" {
-  description = "HOME path for transfer server user. Mustn't start with /"
+  description = "HOME path for transfer server user. Mustn't start or end with /"
   type        = string
   default     = ""
 }
@@ -47,4 +47,10 @@ variable "read_only" {
   description = "Define if the user is created with read-only privileges"
   type        = bool
   default     = false
+}
+
+variable "secret_access_lambda_role" {
+  description = "Name of the role used by the secret-accessing Lambda. Used to add additional permissions as needed. May cause KMS errors if omitted."
+  type        = string
+  default     = ""
 }
